@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { initializeApp } from "firebase/app"; // Import the functions you need from the SDKs you need
 export const FirebaseContext = createContext(null);
 // Complete our context 
 
@@ -14,6 +15,8 @@ const firebaseConfig = {
 
 export const useFirebase = useContext(FirebaseContext);
 // This is a custom hook to use the context
+
+const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
 
 export const FirebaseProvider = (props) => {
     <FirebaseContext.Provider>
