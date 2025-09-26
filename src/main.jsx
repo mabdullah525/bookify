@@ -7,9 +7,10 @@ import { FirebaseProvider } from './Context/firebase.jsx' // Import the provider
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-      <FirebaseProvider /> { /* Wrap App with the provider */}
+    <BrowserRouter> 
+      <FirebaseProvider> { /* Wrap App with the provider */}
+        <App />
+      </FirebaseProvider>
     </BrowserRouter>
   </StrictMode>,
 )
