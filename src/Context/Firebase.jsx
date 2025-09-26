@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { initializeApp } from "firebase/app"; // Import the functions you need from the SDKs you need
 export const FirebaseContext = createContext(null);
 // Complete our context 
@@ -18,9 +18,11 @@ export const useFirebase = () => useContext(FirebaseContext);
 
 const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
 
-export const FirebaseProvider = (props) => {
-    <FirebaseContext.Provider>
-        {props.children}
-    </FirebaseContext.Provider>
-};
+export const FirebaseProvider = ({ children }) => {
+    return (
+        <FirebaseContext.Provider value={{ app: firebaseApp }}>
+            {children}
+        </FirebaseContext.Provider>
+    );
+}
 // Complete the  provider

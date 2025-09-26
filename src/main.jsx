@@ -1,16 +1,15 @@
-import React from 'react'
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App.jsx'
-import { FirebaseProvider } from './Context/firebase.jsx' // Import the provider
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import { FirebaseProvider } from "./Context/Firebase.jsx";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter> 
-      <FirebaseProvider> { /* Wrap App with the provider */}
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <FirebaseProvider>
         <App />
       </FirebaseProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
