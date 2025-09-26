@@ -13,7 +13,7 @@ const firebaseConfig = {
     appId: "1:785991373853:web:420c2f60557d957c11e2f4"
 };
 
-export const useFirebase = useContext(FirebaseContext);
+export const useFirebase = () => useContext(FirebaseContext);
 // This is a custom hook to use the context
 
 const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
