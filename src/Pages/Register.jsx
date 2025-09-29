@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useFirebase } from '../Context/firebase'
+import { Link } from "react-router-dom";
+
 
 const Register = () => {
     const firebase = useFirebase();
@@ -39,7 +41,8 @@ const Register = () => {
                 </form>
 
                 <p className="login-text">
-                    Already have an account? <a href="#" className="login-link">Login</a>
+                    Already have an account?{" "}
+                    <Link to="/login" className="login-link">Login</Link>
                 </p>
             </div>
         </div>
