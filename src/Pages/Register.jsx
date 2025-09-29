@@ -6,11 +6,8 @@ const Register = () => {
             <div class="register-box">
                 <h2 class="title">Create Your Account</h2>
                 <form class="register-form">
-                    <input type="text" placeholder="Full Name" class="input" required />
                     <input type="email" placeholder="Email Address" class="input" required />
                     <input type="password" placeholder="Password" class="input" required />
-                    <input type="password" placeholder="Confirm Password" class="input" required />
-
                     <button type="submit" class="btn">Register</button>
                 </form>
 
