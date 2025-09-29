@@ -2,16 +2,24 @@ import React, { useState } from 'react'
 import { useFirebase } from '../Context/firebase'
 
 const Register = () => {
+    const firebase = useFirebase();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const firebase = useFirebase();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Form submitted with:", { email, password });
+        await firebase.signupUserWithEmailAndPassword(email, password)
+        console.log("User registered successfully");
+    }
+
+
     console.log(firebase);
     return (
         <div className="register-page">
             <div className="register-box">
                 <h2 className="title">Create Your Account</h2>
-                <form className="register-form">
+                <form className="register-form" onSubmit={handleSubmit}>
                     <input
                         type="email"
                         placeholder="Email Address"
