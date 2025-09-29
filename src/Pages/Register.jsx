@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFirebase } from '../Context/firebase'
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
     const firebase = useFirebase();
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+     useEffect(() => {
+            if (firebase.isLoggedIn) {
+                // Redirect to home page or dashboard
+                navigate("/");
+            }
+    
+        }, [firebase, navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,8 +25,7 @@ const Register = () => {
         console.log("User registered successfully");
     }
 
-
-    console.log(firebase);
+   
     return (
         <div className="register-page">
             <div className="register-box">

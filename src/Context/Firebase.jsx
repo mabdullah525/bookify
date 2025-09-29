@@ -32,8 +32,8 @@ export const FirebaseProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        onAuthStateChanged(firebaseAuth, (currentUser) => {
-            if (user) setUser(currentUser)
+        onAuthStateChanged(firebaseAuth, (user) => {
+            if (user) setUser(user)
             else setUser(null)
         }, [])
     });
@@ -51,7 +51,7 @@ export const FirebaseProvider = ({ children }) => {
 
 
     return (
-        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, signInWithGoogle, isLoggedIn }}>
+        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, signInWithGoogle, isLoggedIn, }}>
             {children}
         </FirebaseContext.Provider>
     );

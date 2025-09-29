@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFirebase } from '../Context/firebase'
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const firebase = useFirebase();
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    console.log(firebase)
+
+
+    useEffect(() => {
+        if (firebase.isLoggedIn) {
+            // Redirect to home page or dashboard
+            navigate("/");
+        }
+
+    }, [firebase, navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +66,7 @@ const Login = () => {
                 <button
                     onClick={firebase.signInWithGoogle}
                     type="button"
-                    
+
 
                     className="google-btn"
                 >
