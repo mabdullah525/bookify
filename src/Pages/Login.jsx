@@ -50,9 +50,11 @@ const Login = () => {
 
                 {/* Google Sign-In Button */}
                 <button
+                    onClick={firebase.signInWithGoogle}
                     type="button"
+                    
 
-                    className="w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition"
+                    className="google-btn"
                 >
                     <img
                         src="https://www.svgrepo.com/show/355037/google.svg"

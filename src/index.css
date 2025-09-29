@@ -33,3 +33,6 @@
 .login-link {
   @apply text-purple-600 font-medium hover:underline;
 }
+.google-btn {
+  @apply cursor-pointer w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition;
+}
