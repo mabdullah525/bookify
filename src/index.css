@@ -37,20 +37,33 @@
   @apply cursor-pointer w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition;
 }
 
-/* Navbar Styles */
+/* Dark & Aesthetic Navbar */
 .navbar {
-  @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 
-         text-white flex items-center px-6 py-4 shadow-lg relative;
+  @apply bg-gray-900/95 backdrop-blur-md 
+         text-gray-100 flex items-center px-6 py-4 shadow-lg relative;
 }
 
 .logo {
-  @apply text-xl font-bold tracking-wide absolute left-6;
+  @apply text-2xl font-extrabold tracking-wide text-purple-400 absolute left-6;
 }
 
 .nav-links {
-  @apply flex gap-6 justify-center w-full;
+  @apply flex gap-8 justify-center w-full;
 }
 
 .nav-link {
-  @apply text-white hover:text-yellow-300 transition-colors duration-300;
+  @apply relative text-gray-300 font-medium transition duration-300;
+}
+
+.nav-link::after {
+  content: "";
+  @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-purple-400 transition-all duration-300;
+}
+
+.nav-link:hover {
+  @apply text-purple-400;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
 }

@@ -2,13 +2,14 @@ import React from 'react'
 
 const Navbar = () => {
     return (
-        <div class="navbar">
-            <div class="logo">📚 Bookify</div>
-            <div class="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/books" class="nav-link">Book Listing</a>
+        <div className="navbar">
+            <div className="logo">📚 Bookify</div>
+            <div className="nav-links">
+                <a href="/" className="nav-link active">Home</a>
+                <a href="/books" className="nav-link">Book Listing</a>
             </div>
         </div>
+
 
     )
 }
