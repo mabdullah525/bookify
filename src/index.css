@@ -36,3 +36,21 @@
 .google-btn {
   @apply cursor-pointer w-full flex items-center justify-center gap-2 border border-gray-300 py-2 rounded-lg font-medium hover:bg-gray-100 transition;
 }
+
+/* Navbar Styles */
+.navbar {
+  @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 
+         text-white flex items-center px-6 py-4 shadow-lg relative;
+}
+
+.logo {
+  @apply text-xl font-bold tracking-wide absolute left-6;
+}
+
+.nav-links {
+  @apply flex gap-6 justify-center w-full;
+}
+
+.nav-link {
+  @apply text-white hover:text-yellow-300 transition-colors duration-300;
+}
