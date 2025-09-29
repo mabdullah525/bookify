@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 import { initializeApp } from "firebase/app"; // Import the functions you need from the SDKs you need
 export const FirebaseContext = createContext(null);
 // Complete our context 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Import Firebase Authentication
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"; // Import Firebase Authentication
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,9 +21,13 @@ const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
 const firebaseAuth = getAuth(firebaseApp); // Initialize Firebase Authentication
 
 export const FirebaseProvider = ({ children }) => {
-    const signupUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(firebaseAuth, email, password)
+    // Function to sign up a user with email and password
+    const signupUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(firebaseAuth, email, password);
+    // Function to sign in a user with email and password
+    const signinUserWithEmailAndPassword = (email, password) => signInWithEmailAndPassword(firebaseAuth, email, password);
+
     return (
-        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword }}>
+        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword, signinUserWithEmailAndPassword }}>
             {children}
         </FirebaseContext.Provider>
     );
