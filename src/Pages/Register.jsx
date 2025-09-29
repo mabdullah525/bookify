@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useFirebase } from '../Context/firebase'
 
 const Register = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const firebase = useFirebase();
+    console.log(firebase);
     return (
-        <div class="register-page">
-            <div class="register-box">
-                <h2 class="title">Create Your Account</h2>
-                <form class="register-form">
-                    <input type="email" placeholder="Email Address" class="input" required />
-                    <input type="password" placeholder="Password" class="input" required />
-                    <button type="submit" class="btn">Register</button>
+        <div className="register-page">
+            <div className="register-box">
+                <h2 className="title">Create Your Account</h2>
+                <form className="register-form">
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        className="input"
+                        required
+                        onChange={e => setEmail(e.target.value)}
+                        value={email}
+                    />
+                    <input type="password"
+                        placeholder="Password"
+                        className="input"
+                        required
+                        onChange={e => setPassword(e.target.value)}
+                        value={password}
+                    />
+                    <button type="submit" className="btn">Register</button>
                 </form>
 
-                <p class="login-text">
-                    Already have an account? <a href="#" class="login-link">Login</a>
+                <p className="login-text">
+                    Already have an account? <a href="#" className="login-link">Login</a>
                 </p>
             </div>
         </div>
