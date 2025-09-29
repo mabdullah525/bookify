@@ -18,10 +18,12 @@ export const useFirebase = () => useContext(FirebaseContext);
 // This is a custom hook to use the context
 
 const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
+const firebaseAuth = getAuth(firebaseApp); // Initialize Firebase Authentication
 
 export const FirebaseProvider = ({ children }) => {
+    const signupUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(firebaseAuth, email, password)
     return (
-        <FirebaseContext.Provider value={{ app: firebaseApp }}>
+        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword }}>
             {children}
         </FirebaseContext.Provider>
     );
