@@ -2,6 +2,7 @@ import React, { createContext, useContext } from "react";
 import { initializeApp } from "firebase/app"; // Import the functions you need from the SDKs you need
 export const FirebaseContext = createContext(null);
 // Complete our context 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Import Firebase Authentication
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
