@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFirebase } from '../Context/firebase'
 
-const Register = () => {
+const Login = () => {
     const firebase = useFirebase();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,11 +35,11 @@ const Register = () => {
                         onChange={e => setPassword(e.target.value)}
                         value={password}
                     />
-                    <button type="submit" className="btn">Create Account</button>
+                    <button type="submit" className="btn">Login</button>
                 </form>
 
                 <p className="login-text">
-                    Already have an account? <a href="#" className="login-link">Login</a>
+                    Already have an account? <a href="#" className="login-link">Create Account</a>
                 </p>
             </div>
         </div>
@@ -47,4 +47,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Login
