@@ -6,61 +6,71 @@ const List = () => {
     const [price, setPrice] = useState("");
     const [coverPic, setCoverPic] = useState("");
 
+    const handleSubmit = async (e) => {
+
+    }
+
 
 
     return (
         <div className="register-page">
             <div className="register-box">
-                <h2 className="title">Create Your Account</h2>
+                <h2 className="title">
+                    Add New Book
+                </h2>
 
                 <form className="register-form" onSubmit={handleSubmit}>
                     <input
-                        type="email"
-                        placeholder="Email Address"
+                        type="text"
+                        placeholder="Enter Book Name"
                         className="input"
                         required
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
+                        onChange={e => setName(e.target.value)}
+                        value={name}
                     />
                     <input
-                        type="password"
-                        placeholder="Password"
+                        type="text"
+                        placeholder="Enter ISBN Number"
                         className="input"
                         required
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
+                        onChange={e => setIsbnNumber(e.target.value)}
+                        value={isbnNumber}
                     />
-                    <button type="submit" className="btn">Login</button>
+                    <input
+                        type="text"
+                        placeholder="Enter Price"
+                        className="input"
+                        required
+                        onChange={e => setPrice(e.target.value)}
+                        value={price}
+                    />
+                    <div className="flex flex-col gap-2">
+                        <label className="font-medium text-gray-200">Upload Cover</label>
+
+                        <input
+                            type="file"
+                            id="fileUpload"
+                            className="hidden"
+                            onChange={e => setCoverPic(e.target.files[0])}
+                        />
+
+                        <label
+                            htmlFor="fileUpload"
+                            className="cursor-pointer bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-center transition"
+                        >
+                            Choose File
+                        </label>
+
+                        {coverPic && (
+                            <p className="text-sm text-gray-400">Selected: {coverPic.name}</p>
+                        )}
+                    </div>
+
+
+                    <button type="submit" className="btn">Create</button>
                 </form>
 
-                {/* Divider line */}
-                <div className="flex items-center my-4">
-                    <div className="flex-grow border-t border-gray-300"></div>
-                    <span className="px-3 text-gray-500 text-sm">OR</span>
-                    <div className="flex-grow border-t border-gray-300"></div>
-                </div>
 
-                {/* Google Sign-In Button */}
-                <button
-                    onClick={firebase.signInWithGoogle}
-                    type="button"
-
-
-                    className="google-btn"
-                >
-                    <img
-                        src="https://www.svgrepo.com/show/355037/google.svg"
-                        alt="Google"
-                        className="w-5 h-5"
-                    />
-                    Sign in with Google
-                </button>
-                <p className="login-text">
-                    Already have an account?{" "}
-                    <Link to="/Register" className="login-link">
-                        Register
-                    </Link>
-                </p>
             </div>
         </div>
     )
