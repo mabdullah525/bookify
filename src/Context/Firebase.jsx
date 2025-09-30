@@ -1,18 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { initializeApp } from "firebase/app"; // Import the functions you need from the SDKs you need
-export const FirebaseContext = createContext(null);
-// Complete our context 
+import { initializeApp } from "firebase/app"; 
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
-    onAuthStateChanged, // to detect user login or not ?
-} from "firebase/auth"; // Import Firebase Authentication
-import { getFirestore } from "firebase/firestore"; // Import Firestore
+    onAuthStateChanged,
+} from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore"; 
 
-// Your web app's Firebase configuration
+export const FirebaseContext = createContext(null);
+export const useFirebase = () => useContext(FirebaseContext);
+
 const firebaseConfig = {
     apiKey: "AIzaSyAoOnBEUTCvS5NBM8-PMZuG6UO9F3VqSQA",
     authDomain: "bookify-66100.firebaseapp.com",
@@ -22,51 +22,82 @@ const firebaseConfig = {
     appId: "1:785991373853:web:420c2f60557d957c11e2f4"
 };
 
-export const useFirebase = () => useContext(FirebaseContext);
-// This is a custom hook to use the context
-const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
-const firebaseAuth = getAuth(firebaseApp); // Initialize Firebase Authentication
-const googleProvider = new GoogleAuthProvider(); // Initialize Google Auth Provider
-const firestore = getFirestore(firebaseApp); // Initialize Firestore
+const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
+const googleProvider = new GoogleAuthProvider();
+const firestore = getFirestore(firebaseApp);
 
 export const FirebaseProvider = ({ children }) => {
-
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        onAuthStateChanged(firebaseAuth, (user) => {
-            if (user) setUser(user)
-            else setUser(null)
-        }, [])
-    });
-    // Function to sign up a user with email and password
-    const signupUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(firebaseAuth, email, password);
+        const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+            if (user) setUser(user);
+            else setUser(null);
+        });
 
-    // Function to sign in a user with email and password
-    const signinUserWithEmailAndPassword = (email, password) => signInWithEmailAndPassword(firebaseAuth, email, password);
+        return () => unsubscribe();
+    }, []);
 
-    // Function to sign in with Google
-    const signInWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
+    // Auth Functions
+    const signupUserWithEmailAndPassword = (email, password) =>
+        createUserWithEmailAndPassword(firebaseAuth, email, password);
 
-    const isLoggedIn = user ? true : false;
-    // Function to create a new listing
-    const handelCreateNewListing = (name, isbnNumber, price, coverPic) => {
+    const signinUserWithEmailAndPassword = (email, password) =>
+        signInWithEmailAndPassword(firebaseAuth, email, password);
 
-    }
+    const signInWithGoogle = () =>
+        signInWithPopup(firebaseAuth, googleProvider);
 
+    const isLoggedIn = !!user;
 
+    // ✅ Function to create a new listing
+    const handelCreateNewListing = async (name, isbnNumber, price, coverPic) => {
+        try {
+            // Step 1: Upload to Cloudinary
+            const data = new FormData();
+            data.append("file", coverPic);
+            data.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+            const res = await fetch(
+                `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                {
+                    method: "POST",
+                    body: data,
+                }
+            );
+
+            const fileData = await res.json();
+            const imageUrl = fileData.secure_url;
+
+            // Step 2: Save in Firestore
+            await addDoc(collection(firestore, "books"), {
+                name,
+                isbnNumber,
+                price,
+                coverUrl: imageUrl,
+                createdBy: user ? user.uid : null,
+                createdAt: new Date(),
+            });
+
+            console.log("✅ Book Added:", name);
+        } catch (err) {
+            console.error("❌ Error creating listing:", err);
+        }
+    };
 
     return (
-        <FirebaseContext.Provider value={{
-            app: firebaseApp,
-            signupUserWithEmailAndPassword,
-            signinUserWithEmailAndPassword,
-            signInWithGoogle,
-            handelCreateNewListing,
-            isLoggedIn,
-        }}>
+        <FirebaseContext.Provider
+            value={{
+                app: firebaseApp,
+                signupUserWithEmailAndPassword,
+                signinUserWithEmailAndPassword,
+                signInWithGoogle,
+                handelCreateNewListing,
+                isLoggedIn,
+            }}
+        >
             {children}
         </FirebaseContext.Provider>
     );
-}
-// Complete the  provider
+};

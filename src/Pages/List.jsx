@@ -8,21 +8,35 @@ const List = () => {
     const [isbnNumber, setIsbnNumber] = useState("");
     const [price, setPrice] = useState("");
     const [coverPic, setCoverPic] = useState("");
+    const [success, setSuccess] = useState(""); // ✅ success message state
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       await firebase.handelCreateNewListing(name, isbnNumber, price, coverPic);
+        try {
+            await firebase.handelCreateNewListing(name, isbnNumber, price, coverPic);
+            setSuccess("✅ Your book listing has been submitted successfully!");
 
+            // Clear form fields
+            setName("");
+            setIsbnNumber("");
+            setPrice("");
+            setCoverPic("");
+        } catch (error) {
+            setSuccess("❌ Something went wrong, please try again.");
+        }
     }
-
-
 
     return (
         <div className="register-page">
             <div className="register-box">
-                <h2 className="title">
-                    Add New Book
-                </h2>
+                <h2 className="title">Add New Book</h2>
+
+                {/* ✅ Success / Error Message */}
+                {success && (
+                    <p className="mb-4 text-center text-green-400 font-semibold">
+                        {success}
+                    </p>
+                )}
 
                 <form className="register-form" onSubmit={handleSubmit}>
                     <input
@@ -49,6 +63,7 @@ const List = () => {
                         onChange={e => setPrice(e.target.value)}
                         value={price}
                     />
+
                     <div className="flex flex-col gap-2">
                         <label className="font-medium text-gray-200">Upload Cover</label>
 
@@ -67,15 +82,14 @@ const List = () => {
                         </label>
 
                         {coverPic && (
-                            <p className="text-sm text-gray-400">Selected: {coverPic.name}</p>
+                            <p className="text-sm text-gray-400">
+                                Selected: {coverPic.name}
+                            </p>
                         )}
                     </div>
 
-
                     <button type="submit" className="btn">Create</button>
                 </form>
-
-
             </div>
         </div>
     )
