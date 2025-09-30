@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const List = () => {
+    const [name, setName] = useState("");
+    const [isbnNumber, setIsbnNumber] = useState("");
+    const [price, setPrice] = useState("");
+    const [coverPic, setCoverPic] = useState("");
+
+
+
     return (
         <div className="register-page">
             <div className="register-box">
