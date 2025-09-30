@@ -10,6 +10,7 @@ import {
     signInWithPopup,
     onAuthStateChanged, // to detect user login or not ?
 } from "firebase/auth"; // Import Firebase Authentication
+import { getFirestore } from "firebase/firestore"; // Import Firestore
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,6 +27,7 @@ export const useFirebase = () => useContext(FirebaseContext);
 const firebaseApp = initializeApp(firebaseConfig); // Initialize Firebase
 const firebaseAuth = getAuth(firebaseApp); // Initialize Firebase Authentication
 const googleProvider = new GoogleAuthProvider(); // Initialize Google Auth Provider
+const firestore = getFirestore(firebaseApp); // Initialize Firestore
 
 export const FirebaseProvider = ({ children }) => {
 
@@ -47,11 +49,22 @@ export const FirebaseProvider = ({ children }) => {
     const signInWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
 
     const isLoggedIn = user ? true : false;
+    // Function to create a new listing
+    const handelCreateNewListing = (name, isbnNumber, price, coverPic) => {
+
+    }
 
 
 
     return (
-        <FirebaseContext.Provider value={{ app: firebaseApp, signupUserWithEmailAndPassword, signinUserWithEmailAndPassword, signInWithGoogle, isLoggedIn, }}>
+        <FirebaseContext.Provider value={{
+            app: firebaseApp,
+            signupUserWithEmailAndPassword,
+            signinUserWithEmailAndPassword,
+            signInWithGoogle,
+            handelCreateNewListing,
+            isLoggedIn,
+        }}>
             {children}
         </FirebaseContext.Provider>
     );

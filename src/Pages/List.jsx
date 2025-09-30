@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
+import { useFirebase } from '../Context/firebase'
 
 const List = () => {
+    const firebase = useFirebase();
+
     const [name, setName] = useState("");
     const [isbnNumber, setIsbnNumber] = useState("");
     const [price, setPrice] = useState("");
     const [coverPic, setCoverPic] = useState("");
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+       await firebase.handelCreateNewListing(name, isbnNumber, price, coverPic);
 
     }
 
