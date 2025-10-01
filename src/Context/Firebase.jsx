@@ -8,7 +8,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore"; 
+import { getFirestore, collection, addDoc, getDoc } from "firebase/firestore"; 
 
 export const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext);
@@ -86,6 +86,10 @@ export const FirebaseProvider = ({ children }) => {
         }
     };
 
+    const listAllBooks = async () => {
+        return getDoc(collection(firestore, "books"));
+    }
+
     return (
         <FirebaseContext.Provider
             value={{
@@ -94,6 +98,7 @@ export const FirebaseProvider = ({ children }) => {
                 signinUserWithEmailAndPassword,
                 signInWithGoogle,
                 handelCreateNewListing,
+                listAllBooks,
                 isLoggedIn,
             }}
         >
