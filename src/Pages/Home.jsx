@@ -7,10 +7,15 @@ const Home = () => {
 
     const firebase = useFirebase();
     useEffect(() => {
-        firebase.listAllBooks().then((docs) => console.log(docs.docs[0].data()));
+        firebase.listAllBooks().then((books) => setBooks(books.docs));
     }, []);
     return (
-        <div>Home</div>
+        <div>
+            {
+                books.map(book => <li>{book.data().name}</li>)
+            }
+
+        </div>
     )
 }
 
