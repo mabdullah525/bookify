@@ -8,7 +8,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore"; 
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore"; 
 
 export const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext);
@@ -88,6 +88,12 @@ export const FirebaseProvider = ({ children }) => {
 
     const listAllBooks = async () => {
         return getDocs(collection(firestore, "books"));
+    }
+
+    const getBookById = async (id) => {
+        const docRef = doc(firestore, "books", id);
+        const result = await getDoc(docRef);
+        return result;
     }
 
     return (
