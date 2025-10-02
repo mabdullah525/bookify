@@ -105,6 +105,7 @@ export const FirebaseProvider = ({ children }) => {
                 signInWithGoogle,
                 handelCreateNewListing,
                 listAllBooks,
+                getBookById,
                 isLoggedIn,
             }}
         >
