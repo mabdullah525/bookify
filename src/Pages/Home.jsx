@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useFirebase } from '../Context/firebase'
+import Card from '../Components/Card';
 
 const Home = () => {
 
@@ -12,8 +13,9 @@ const Home = () => {
     return (
         <div>
             {
-                books.map(book => <li>{book.data().name}</li>)
-            }
+                books.map((book) => (
+                    <Card />
+                ))}
 
         </div>
     )

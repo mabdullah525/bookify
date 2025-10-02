@@ -7,6 +7,7 @@ import List from "./Pages/List";
 import Home from "./Pages/Home";
 // Components
 import Navbar from "./Components/Navbar";
+import Card from "./Components/Card";
 
 const App = () => {
   return (
