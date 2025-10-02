@@ -50,6 +50,8 @@ export const FirebaseProvider = ({ children }) => {
 
     const isLoggedIn = !!user;
 
+    //  console.log(user); // ✅ Check user state
+
     // ✅ Function to create a new listing
     const handelCreateNewListing = async (name, isbnNumber, price, coverPic) => {
         try {
@@ -76,7 +78,7 @@ export const FirebaseProvider = ({ children }) => {
                 price,
                 userID: user.uid,
                 coverUrl: imageUrl,
-                userEmail: user.email, // ✅ ab hamesha save hoga
+                userEmail: user.email, // ✅ store user email
                 displayName: user.displayName || user.email.split("@")[0], // ✅ fallback if no displayName
                 createdAt: new Date(),
             });
