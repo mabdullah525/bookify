@@ -11,13 +11,12 @@ const Home = () => {
         firebase.listAllBooks().then((books) => setBooks(books.docs));
     }, []);
     return (
-        <div>
-            {
-                books.map((book) => (
-                    <Card {...book.data()} />
-                ))}
-
+        <div className="home-container">
+            {books.map((book) => (
+                <Card key={book.id} {...book.data()} />
+            ))}
         </div>
+
     )
 }
 

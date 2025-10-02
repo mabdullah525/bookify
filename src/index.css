@@ -99,3 +99,8 @@
 .card-icon {
   @apply rtl:rotate-180 w-3.5 h-3.5 ms-2;
 }
+
+.home-container {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center p-6;
+}
+
