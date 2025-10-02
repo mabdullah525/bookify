@@ -14,7 +14,7 @@ const Home = () => {
         <div>
             {
                 books.map((book) => (
-                    <Card />
+                    <Card {...book.data()} />
                 ))}
 
         </div>

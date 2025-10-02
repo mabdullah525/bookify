@@ -1,21 +1,23 @@
 import React from 'react'
 
+
 const Card = (props) => {
   return (
-
-
     <div className="card">
       <a href="#">
-        <img className="card-image" src="/docs/images/blog/image-1.jpg" alt="" />
+        {/* ✅ Image dynamically from props */}
+        <img className="card-image" src={props.coverUrl} alt={props.name} />
       </a>
       <div className="card-body">
         <a href="#">
           <h5 className="card-title">
-            Noteworthy technology acquisitions 2021
+            {props.name}
           </h5>
         </a>
         <p className="card-text">
-          Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+          This Book has a title <span className="font-semibold">{props.name}</span>,
+          sold by <span className="font-semibold">{props.displayName}</span>,
+          and costs <span className="text-green-400">Rs.{props.price}</span>
         </p>
         <a href="#" className="card-button">
           Read more
@@ -37,8 +39,6 @@ const Card = (props) => {
         </a>
       </div>
     </div>
-
-
   )
 }
 
