@@ -1,7 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useFirebase } from '../Context/firebase';
 
 
 const Card = (props) => {
+  const firebase = useFirebase();
+  const navigate = useNavigate();
   return (
     <div className="card">
       <a href="#">
@@ -19,8 +23,8 @@ const Card = (props) => {
           sold by <span className="font-semibold">{props.displayName}</span>,
           and costs <span className="text-green-400">Rs.{props.price}</span>
         </p>
-        <a href="#" className="card-button">
-          Read more
+        <a onClick={e => navigate(`/book/view/${props.id}`)} className="card-button">
+          View Details
           <svg
             className="card-icon"
             aria-hidden="true"
