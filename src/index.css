@@ -104,3 +104,51 @@
   @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center p-6;
 }
 
+ .detail-card {
+  @apply max-w-md mx-auto p-5 bg-white dark:bg-gray-800 rounded-xl shadow-lg mt-10;
+}
+
+.detail-image {
+  @apply w-full h-56 object-cover rounded-lg shadow mb-4;
+}
+
+.detail-title {
+  @apply text-2xl font-bold text-gray-900 dark:text-white mb-3;
+}
+
+.detail-info {
+  @apply mb-4;
+}
+
+.detail-info p {
+  @apply text-gray-700 dark:text-gray-300 mb-1;
+}
+
+.label {
+  @apply font-semibold;
+}
+
+.price {
+  @apply text-green-600 font-bold;
+}
+
+.owner-info {
+  @apply mb-5 border-t pt-3;
+}
+
+.owner-info h3 {
+  @apply text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2;
+}
+
+.owner-info p {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.buy-button {
+  @apply w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow transition;
+}
+
+.loading {
+  @apply text-center text-gray-500 mt-10;
+}
+
