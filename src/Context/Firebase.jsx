@@ -113,12 +113,18 @@ export const FirebaseProvider = ({ children }) => {
     }
 
     const fetchMyOrders = async () => {
-        const collectionRef = collection(firestore, "books");
+        if (!user) {
+            console.warn("User not logged in ❌");
+            return [];
+        }
 
-        const q = query(collection, where("userID", "==", user.uid));
+        const collectionRef = collection(firestore, "books");
+        const q = query(collectionRef, where("userID", "==", user.uid));
+
         const result = await getDocs(q);
-        console.log(result);
-    }
+        return result;
+    };
+
 
     return (
         <FirebaseContext.Provider
@@ -131,6 +137,7 @@ export const FirebaseProvider = ({ children }) => {
                 listAllBooks,
                 getBookById,
                 placeOrder,
+                fetchMyOrders,
                 isLoggedIn,
                 user, // ✅ user context me bhi available kar diya
             }}
