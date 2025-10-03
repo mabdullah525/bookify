@@ -24,7 +24,7 @@ const Card = (props) => {
           sold by <span className="font-semibold">{props.displayName}</span>,
           and costs <span className="text-green-400">Rs.{props.price}</span>
         </p>
-        <a onClick={e => navigate(`/book/view/${props.id}`)} className="card-button">
+        <a onClick={e => navigate(props.link)} className="card-button">
           View Details
           <svg
             className="card-icon"

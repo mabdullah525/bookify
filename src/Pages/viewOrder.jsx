@@ -26,7 +26,12 @@ const ViewOrder = () => {
     return (
         <div className="orders-container">
             {books.map((book) => (
-                <BookCard key={book.id} id={book.id} {...book.data()} />
+                <BookCard
+                    link={`/book/orders/${book.id}`}
+                    key={book.id}
+                    id={book.id}
+                    {...book.data()}
+                />
             ))}
         </div>
 

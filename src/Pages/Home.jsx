@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <div className="home-container">
             {books.map((book) => (
-                <Card key={book.id} id={book.id} {...book.data()} />
+                <Card link={`/book/view/${book.id}`} key={book.id} id={book.id} {...book.data()} />
             ))}
         </div>
 
