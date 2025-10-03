@@ -8,7 +8,7 @@ import {
     signInWithPopup,
     onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, where } from "firebase/firestore";
 
 export const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext);
@@ -110,6 +110,14 @@ export const FirebaseProvider = ({ children }) => {
             displayName: user.displayName || user.email.split("@")[0], // ✅ fallback if no displayName
         });
         return result;
+    }
+
+    const fetchMyOrders = async () => {
+        const collectionRef = collection(firestore, "books");
+
+        const q = query(collection, where("userID", "==", user.uid));
+        const result = await getDocs(q);
+        console.log(result);
     }
 
     return (
