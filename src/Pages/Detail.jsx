@@ -16,8 +16,6 @@ const Detail = () => {
         return <div className="loading">Loading...</div>;
     }
 
-    console.log(data);
-
     return (
         <div className="detail-card">
             {/* Book Image */}
