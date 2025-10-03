@@ -100,6 +100,16 @@ export const FirebaseProvider = ({ children }) => {
         return result;
     };
 
+    const placeOrder = async (bookId) => {
+        const collectionRef = collection(firestore, "books", bookId, "orders");
+        const result = await addDoc(collectionRef, {
+            userID: user.uid,
+            coverUrl: imageUrl,
+            userEmail: user.email, // ✅ store user email
+            displayName: user.displayName || user.email.split("@")[0], // ✅ fallback if no displayName
+        });
+    }
+
     return (
         <FirebaseContext.Provider
             value={{

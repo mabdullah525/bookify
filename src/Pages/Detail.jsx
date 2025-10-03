@@ -7,6 +7,7 @@ const Detail = () => {
     const firebase = useFirebase();
 
     const [data, setData] = useState(null);
+    const [qty, setQty] = useState(1);
 
     useEffect(() => {
         firebase.getBookById(params.id).then((value) => setData(value.data()));
@@ -45,6 +46,15 @@ const Detail = () => {
                     <span className="label">Email:</span> {data.userEmail}
                 </p>
             </div>
+
+            <input
+                className="input-number"
+                type="number"
+                placeholder="Enter Quantity"
+                required
+                onChange={e => setQty(e.target.value)}
+                value={qty}
+            />
 
             {/* Buy Button */}
             <button className="buy-button">Buy Now</button>
