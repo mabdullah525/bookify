@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFirebase } from '../Context/firebase';
 
 
+
 const Card = (props) => {
   const firebase = useFirebase();
   const navigate = useNavigate();

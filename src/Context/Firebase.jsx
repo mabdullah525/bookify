@@ -48,7 +48,7 @@ export const FirebaseProvider = ({ children }) => {
 
     const signInWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
 
-    const isLoggedIn = !!user;
+    // const isLoggedIn = !!user;
 
     //  console.log(user); // ✅ Check user state
 
@@ -112,18 +112,19 @@ export const FirebaseProvider = ({ children }) => {
         return result;
     }
 
-    const fetchMyOrders = async () => {
-        if (!user) {
-            console.warn("User not logged in ❌");
-            return [];
-        }
+    const fetchMyBooks = async (userId) => {
+        // if (!user) {
+        //     console.warn("User not logged in ❌");
+        //     return [];
+        // }
 
         const collectionRef = collection(firestore, "books");
-        const q = query(collectionRef, where("userID", "==", user.uid));
+        const q = query(collectionRef, where("userID", "==", userId));
 
         const result = await getDocs(q);
         return result;
     };
+    const isLoggedIn = user ? true : false;
 
 
     return (
@@ -137,9 +138,9 @@ export const FirebaseProvider = ({ children }) => {
                 listAllBooks,
                 getBookById,
                 placeOrder,
-                fetchMyOrders,
+                fetchMyBooks,
                 isLoggedIn,
-                user, // ✅ user context me bhi available kar diya
+                user, 
             }}
         >
             {children}
