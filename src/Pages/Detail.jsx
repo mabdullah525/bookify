@@ -13,6 +13,11 @@ const Detail = () => {
         firebase.getBookById(params.id).then((value) => setData(value.data()));
     }, [params.id, firebase]);
 
+    const placeOder = async () => {
+        const result = await firebase.placeOrder(params.id, qty);
+        console.log("Order Placed:", result);
+    }
+
     if (!data) {
         return <div className="loading">Loading...</div>;
     }
@@ -57,7 +62,7 @@ const Detail = () => {
             />
 
             {/* Buy Button */}
-            <button className="buy-button">Buy Now</button>
+            <button className="buy-button" onClick={placeOder}>Buy Now</button>
         </div>
     );
 };

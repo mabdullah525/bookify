@@ -104,9 +104,9 @@ export const FirebaseProvider = ({ children }) => {
         const collectionRef = collection(firestore, "books", bookId, "orders");
         const result = await addDoc(collectionRef, {
             userID: user.uid,
-            coverUrl: imageUrl,
+            // coverUrl: imageUrl,
             userEmail: user.email, // ✅ store user email
-            qty,
+            qty: Number(qty),
             displayName: user.displayName || user.email.split("@")[0], // ✅ fallback if no displayName
         });
         return result;
