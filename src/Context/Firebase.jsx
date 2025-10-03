@@ -100,14 +100,16 @@ export const FirebaseProvider = ({ children }) => {
         return result;
     };
 
-    const placeOrder = async (bookId) => {
+    const placeOrder = async (bookId, qty) => {
         const collectionRef = collection(firestore, "books", bookId, "orders");
         const result = await addDoc(collectionRef, {
             userID: user.uid,
             coverUrl: imageUrl,
             userEmail: user.email, // ✅ store user email
+            qty,
             displayName: user.displayName || user.email.split("@")[0], // ✅ fallback if no displayName
         });
+        return result;
     }
 
     return (
@@ -120,6 +122,7 @@ export const FirebaseProvider = ({ children }) => {
                 handelCreateNewListing,
                 listAllBooks,
                 getBookById,
+                placeOrder,
                 isLoggedIn,
                 user, // ✅ user context me bhi available kar diya
             }}
