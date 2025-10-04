@@ -124,6 +124,12 @@ export const FirebaseProvider = ({ children }) => {
         const result = await getDocs(q);
         return result;
     };
+
+    const getOrders = async (bookId) => {
+        const collectionRef = collection(firestore, "books", bookId, "orders");
+        const result = await getDocs(collectionRef);
+        return result;
+    }
     const isLoggedIn = user ? true : false;
 
 
@@ -139,6 +145,7 @@ export const FirebaseProvider = ({ children }) => {
                 getBookById,
                 placeOrder,
                 fetchMyBooks,
+                getOrders,
                 isLoggedIn,
                 user, 
             }}
