@@ -18,8 +18,8 @@ const ViewOrder = () => {
         }
     }, [firebase]);
     console.log(books);
-    if (!firebase.isLoggedIn) return <div className='text-center mt-10 text-2xl'>
-        Please login to view your listed books.
+    if (!firebase.isLoggedIn) return <div className="text-center mt-20 text-3xl font-semibold text-purple-400 animate-bounce drop-shadow-lg">
+      🚪 Please login to view your listed books.
     </div>
 
 
