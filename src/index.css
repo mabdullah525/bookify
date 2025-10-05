@@ -55,18 +55,28 @@
   @apply relative text-gray-300 font-medium transition duration-300;
 }
 
+/* Underline (initially hidden) */
 .nav-link::after {
   content: "";
   @apply absolute left-0 -bottom-1 w-0 h-[2px] bg-purple-400 transition-all duration-300;
 }
 
+/* Hover effect */
 .nav-link:hover {
   @apply text-purple-400;
 }
-
 .nav-link:hover::after {
   @apply w-full;
 }
+
+/* ✅ Active Link (route match hone par) */
+.nav-link.active {
+  @apply text-purple-400;
+}
+.nav-link.active::after {
+  @apply w-full;
+}
+
 
 .card {
   @apply max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 transition transform hover:scale-105;
