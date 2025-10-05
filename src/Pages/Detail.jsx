@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFirebase } from "../Context/firebase";
+import Swal from "sweetalert2";
+
 
 const Detail = () => {
     const params = useParams();
