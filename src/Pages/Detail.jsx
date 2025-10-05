@@ -23,6 +23,7 @@ const Detail = () => {
     if (!data) {
         return <div className="loading">Loading...</div>;
     }
+    
 
     return (
         <div className="detail-card">
