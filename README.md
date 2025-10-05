@@ -74,6 +74,7 @@ Bookify/
 └── tailwind.config.js
 
 ⚙️ Setup Instructions
+
 1️⃣ Clone Repository
 
 git clone https://github.com/yourusername/bookify.git
